@@ -8,5 +8,15 @@
         "name": "Bruce Wayne",
         "age": 45,
         "email": "bruce@wayneenterprises.com"
+    },
+    {
+        "name": "Robert Smith",
+        "age": 27,
+        "email": "robert@smith.com"
+    },
+    {
+        "name": "Alice Brown",
+        "age": 35,
+        "email": "alice@brown.com"
     }
 ]
