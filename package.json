@@ -1,0 +1,16 @@
+{
+  "name": "dockerapp-sandbox",
+  "version": "1.0.0",
+  "description": "A sandbox to play with docker, node, and mongo",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Jason Jones",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.6.0"
+  }
+}

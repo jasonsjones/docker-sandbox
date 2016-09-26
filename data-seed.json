@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Clark Kent",
+        "age": 42,
+        "email": "clark@dailyplanet.com"
+    },
+    {
+        "name": "Bruce Wayne",
+        "age": 45,
+        "email": "bruce@wayneenterprises.com"
+    }
+]
