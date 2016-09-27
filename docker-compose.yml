@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    node:
+        container_name: sandbox
+        build:
+            context: .
+            dockerfile: node.dockerfile
+
+    mongo:
+        container_name: mongo-sandbox
+        build:
+            context: .
+            dockerfile: mongo.dockerfile
+
+networks:
+    sandbox-network:
+        driver: bridge
