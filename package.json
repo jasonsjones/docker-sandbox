@@ -1,5 +1,5 @@
 {
-  "name": "dockerapp-sandbox",
+  "name": "docker-sandbox",
   "version": "1.0.0",
   "description": "A sandbox to play with docker, node, and mongo",
   "main": "server.js",
