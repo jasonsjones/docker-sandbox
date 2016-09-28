@@ -6,13 +6,17 @@ services:
         build:
             context: .
             dockerfile: node.dockerfile
-
+        ports:
+            - "3000:3000"
     mongo:
         container_name: mongo-sandbox
         build:
             context: .
             dockerfile: mongo.dockerfile
-
+        volumes:
+            - ./data/db:/data/db
+        ports:
+            - "27017:27017"
 networks:
     sandbox-network:
         driver: bridge
