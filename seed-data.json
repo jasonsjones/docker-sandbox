@@ -1,22 +1,26 @@
 [
     {
         "name": "Clark Kent",
-        "age": 42,
-        "email": "clark@dailyplanet.com"
+        "email": "clark@dailyplanet.com",
+        "admin": true,
+        "dateCreated": ISODate("2016-09-12T00:00:00Z")
     },
     {
         "name": "Bruce Wayne",
-        "age": 45,
-        "email": "bruce@wayneenterprises.com"
+        "email": "bruce@wayneenterprises.com",
+        "admin": false,
+        "dateCreated": ISODate("2016-09-14T00:00:00Z")
     },
     {
-        "name": "Robert Smith",
-        "age": 27,
-        "email": "robert@smith.com"
+        "name": "Tony Stark",
+        "email": "tony@starklabs.com",
+        "admin": true,
+        "dateCreated": ISODate("2016-09-17T00:00:00Z")
     },
     {
-        "name": "Alice Brown",
-        "age": 35,
-        "email": "alice@brown.com"
+        "name": "Barry Allen",
+        "email": "barry@starzlabs.com",
+        "admin": false,
+        "dateCreated": ISODate("2016-09-20T00:00:00Z")
     }
 ]
