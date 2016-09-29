@@ -8,6 +8,8 @@ services:
             dockerfile: node.dockerfile
         ports:
             - "3000:3000"
+        depends_on:
+            - mongo
     mongo:
         container_name: mongo-sandbox
         build:
