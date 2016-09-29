@@ -2,10 +2,10 @@ FROM node
 
 MAINTAINER Jason Jones
 
-RUN npm install nodemon -g
-
-COPY . /src
+COPY package.json *.js /src/
 
 WORKDIR /src
+
+RUN npm install nodemon -g && npm install
 
 CMD ["npm", "start"]
