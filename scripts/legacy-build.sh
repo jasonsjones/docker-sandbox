@@ -10,8 +10,8 @@ else
     docker rm $(docker ps -a -q)
 fi
 
-docker build -f mongo.dockerfile --rm -t mongo-sandbox ../
-docker build -f node.dockerfile --rm -t sandbox ../
+docker build -f mongo.dockerfile --rm -t mongo-sandbox .
+docker build -f node.dockerfile --rm -t sandbox .
 
 IMAGES=$(docker images -f 'dangling=true' -q)
 echo $IMAGES
