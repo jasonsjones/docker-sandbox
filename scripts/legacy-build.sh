@@ -10,8 +10,8 @@ else
     docker rm $(docker ps -a -q)
 fi
 
-docker build -f mongo.dockerfile --rm -t mongo-sandbox .
-docker build -f node.dockerfile --rm -t sandbox .
+docker build -f mongo.dockerfile --rm -t mongo-sandbox ../
+docker build -f node.dockerfile --rm -t sandbox ../
 
 IMAGES=$(docker images -f 'dangling=true' -q)
 echo $IMAGES
@@ -25,7 +25,7 @@ docker run -d --name myMongo -v $(pwd)/data/db:/data/db mongo-sandbox
 
 if [ "$1" = "seed" ]; then
     echo "We are going to seed the database now..."
-    docker exec myMongo mongoimport --db test --collection people --drop --type json --file  data-seed.json --jsonArray
+    docker exec myMongo mongoimport --db dbContainer --collection users --drop --type json --file  data-seed.json --jsonArray
 fi
 
 docker run --rm -p 3000:3000 --link myMongo:mongo -v $(pwd):/src sandbox
