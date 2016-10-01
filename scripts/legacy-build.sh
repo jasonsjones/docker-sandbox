@@ -25,7 +25,7 @@ docker run -d --name myMongo -v $(pwd)/data/db:/data/db mongo-sandbox
 
 if [ "$1" = "seed" ]; then
     echo "We are going to seed the database now..."
-    docker exec myMongo mongoimport --db dbContainer --collection users --drop --type json --file  data-seed.json --jsonArray
+    sh $(pwd)/scripts/seed_db.sh myMongo
 fi
 
 docker run --rm -p 3000:3000 --link myMongo:mongo -v $(pwd):/src sandbox

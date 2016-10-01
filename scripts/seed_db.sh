@@ -1,3 +1,5 @@
 #!/bin/sh
 
-docker exec mongo-sandbox mongoimport --db test --collection users --drop --type json --file  seed-data.json --jsonArray
+# $ ./seed_db.sh <myMongo|mongo-sandbox>
+
+docker exec $1 mongoimport --db dbContainer --collection users --drop --type json --file  seed-data.json --jsonArray

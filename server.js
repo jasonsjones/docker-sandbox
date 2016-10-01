@@ -5,7 +5,7 @@ var app = require('./app');
 var config = {
     db: {
         host: 'mongo',
-        name: 'testdb'
+        name: 'dbContainer'
     },
     port: 3000
 }
