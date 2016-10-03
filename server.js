@@ -65,5 +65,5 @@ app.get('/', function (req, res) {
 });
 
 app.listen(config.port, function () {
-    console.log("App running on port " + config.port);
+    console.log("App running in container on port " + config.port);
 });
