@@ -2,7 +2,7 @@ FROM node
 
 MAINTAINER Jason Jones
 
-COPY package.json *.js views/ /src/
+COPY package.json api/ /src/
 
 WORKDIR /src
 
