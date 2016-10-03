@@ -61,7 +61,10 @@ userRouter.get('/user/:id', function (req, res) {
 app.use('/api', userRouter);
 
 app.get('/', function (req, res) {
-    res.json({msg: 'Hello world from Docker'});
+    res.render('index', {
+        title: 'Docker Node App',
+        msg: 'Hello world from Docker'
+    });
 });
 
 app.listen(config.port, function () {
