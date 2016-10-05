@@ -1,17 +1,11 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var config = require('./config');
 
 var User = require('./models/user');
 
 var app = require('./app');
 
-var config = {
-    db: {
-        host: 'mongo',
-        name: 'dbContainer'
-    },
-    port: 3000
-}
 
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 var db = mongoose.connection;
