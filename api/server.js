@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+
+var User = require('./models/user');
 
 var app = require('./app');
 
@@ -18,15 +19,6 @@ db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function () {
     console.log('We are connected to mongo container');
 });
-
-var userSchema = new Schema({
-    name: { type: String},
-    email: {type: String},
-    admin: {type: Boolean, default: false},
-    dateCreated: {type: Date, default: Date.now()}
-});
-
-var User = mongoose.model('User', userSchema);
 
 var userRouter = express.Router();
 
