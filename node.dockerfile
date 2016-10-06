@@ -6,6 +6,6 @@ COPY package.json api/ /src/
 
 WORKDIR /src
 
-RUN npm install nodemon -g && npm install
+RUN npm install
 
 CMD ["npm", "start"]

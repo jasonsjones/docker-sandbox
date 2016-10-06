@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon api/server.js"
+    "start": "./node_modules/.bin/nodemon api/server.js"
   },
   "author": "Jason Jones",
   "license": "MIT",
@@ -13,5 +13,8 @@
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "mongoose": "^4.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.2"
   }
 }
