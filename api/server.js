@@ -14,9 +14,9 @@ db.once('open', function () {
     console.log('We are connected to mongo container');
 });
 
-var userRouter = express.Router();
+var apiRouter = express.Router();
 
-userRouter.get('/users', function (req, res) {
+apiRouter.get('/users', function (req, res) {
     User.find({}, function (err, users) {
         if (err) {
             console.log(err);
@@ -30,7 +30,7 @@ userRouter.get('/users', function (req, res) {
     });
 });
 
-userRouter.get('/user/:id', function (req, res) {
+apiRouter.get('/user/:id', function (req, res) {
     User.findById(req.params.id, function (err, user) {
         if (err) {
             console.log(err);
@@ -44,7 +44,7 @@ userRouter.get('/user/:id', function (req, res) {
     });
 });
 
-app.use('/api', userRouter);
+app.use('/api', apiRouter);
 
 app.get('/', function (req, res) {
     res.render('index', {
