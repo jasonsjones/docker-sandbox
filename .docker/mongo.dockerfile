@@ -2,7 +2,7 @@ FROM mongo
 
 MAINTAINER Jason Jones
 
-COPY seed-data.json /data/seed-data.json
+COPY scripts/seed-data.json /data/seed-data.json
 
 VOLUME ["/data/db"]
 WORKDIR /data

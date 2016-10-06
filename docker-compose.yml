@@ -5,7 +5,7 @@ services:
         container_name: sandbox
         build:
             context: .
-            dockerfile: node.dockerfile
+            dockerfile: .docker/node.dockerfile
         volumes:
             - .:/home/app/
             - /home/app/node_modules
@@ -17,7 +17,7 @@ services:
         container_name: mongo-sandbox
         build:
             context: .
-            dockerfile: mongo.dockerfile
+            dockerfile: .docker/mongo.dockerfile
         volumes:
             - ./data/db:/data/db
         ports:
