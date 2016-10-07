@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon api/server.js",
-    "jscs": "jscs api/*.js api/**/*.js"
+    "jscs": "jscs api/*.js api/**/*.js",
+    "lint": "eslint api/*.js"
   },
   "author": "Jason Jones",
   "license": "MIT",
@@ -16,6 +17,8 @@
     "mongoose": "^4.6.0"
   },
   "devDependencies": {
+    "eslint": "^3.7.1",
+    "eslint-config-google": "^0.6.0",
     "jscs": "^3.0.7",
     "jshint": "^2.9.3",
     "nodemon": "^1.10.2"
