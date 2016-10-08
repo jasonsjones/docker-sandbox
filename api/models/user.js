@@ -4,6 +4,10 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
     name: {type: String},
     email: {type: String},
+    local: {
+        username: {type: String},
+        password: {type: String}
+    },
     admin: {type: Boolean, default: false},
     dateCreated: {type: Date, default: Date.now()}
 });
