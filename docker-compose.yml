@@ -2,7 +2,7 @@ version: '2'
 
 services:
     node:
-        container_name: sandbox
+        container_name: node-sandbox
         build:
             context: .
             dockerfile: .docker/node.dockerfile
