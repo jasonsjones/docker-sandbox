@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+    nginx:
+        container_name: nginx
+        build:
+            context: .
+            dockerfile: .docker/nginx.dockerfile
+        links:
+            - node1:node1
+            - node2:node2
+        ports:
+            - "80:80"
+    node1:
+        container_name: node1
+        build:
+            context: .
+            dockerfile: .docker/node.dockerfile
+        volumes:
+            - .:/home/app
+        ports:
+            - "3000"
+        depends_on:
+            - mongo
+    node2:
+        container_name: node2
+        build:
+            context: .
+            dockerfile: .docker/node.dockerfile
+        volumes:
+            - .:/home/app
+        ports:
+            - "3000"
+        depends_on:
+            - mongo
+    mongo:
+        container_name: mongo
+        build:
+            context: .
+            dockerfile: .docker/mongo.dockerfile
+        volumes:
+            - ./data/db:/data/db
+        ports:
+            - "27017:27017"
+networks:
+    sandbox-network:
+        driver: bridge
