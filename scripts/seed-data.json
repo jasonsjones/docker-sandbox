@@ -2,24 +2,40 @@
     {
         "name": "Clark Kent",
         "email": "clark@dailyplanet.com",
+        "local": {
+            "username": "superman",
+            "password": "pa$$w0rd"
+        },
         "admin": true,
         "dateCreated": ISODate("2016-09-12T00:00:00Z")
     },
     {
         "name": "Bruce Wayne",
         "email": "bruce@wayneenterprises.com",
+        "local": {
+            "username": "batman",
+            "password": "pa$$w0rd"
+        },
         "admin": false,
         "dateCreated": ISODate("2016-09-14T00:00:00Z")
     },
     {
         "name": "Tony Stark",
         "email": "tony@starklabs.com",
+        "local": {
+            "username": "ironman",
+            "password": "pa$$w0rd"
+        },
         "admin": true,
         "dateCreated": ISODate("2016-09-17T00:00:00Z")
     },
     {
         "name": "Barry Allen",
         "email": "barry@starzlabs.com",
+        "local": {
+            "username": "theflash",
+            "password": "pa$$w0rd"
+        },
         "admin": false,
         "dateCreated": ISODate("2016-09-20T00:00:00Z")
     }
