@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon api/server.js",
+    "docker:rm": "docker rm $(docker ps -aq)",
+    "connect:node": "docker-compose run --rm node /bin/bash",
     "jscs": "jscs api/*.js api/**/*.js",
     "lint": "eslint api/*.js"
   },
