@@ -2,8 +2,6 @@ var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config');
 
-var User = require('./models/user');
-
 var app = require('./app');
 
 
@@ -15,43 +13,9 @@ db.once('open', function () {
 });
 
 var apiRouter = express.Router();
-
-apiRouter.get('/users', function (req, res) {
-    User.find({}, function (err, users) {
-        if (err) {
-            console.log(err);
-        }
-        if (users) {
-            console.log("returning all users...");
-            res.json(users);
-        } else {
-            res.json({success: false, msg: 'No users in database'});
-        }
-    });
-});
-
-apiRouter.get('/user/:id', function (req, res) {
-    User.findById(req.params.id, function (err, user) {
-        if (err) {
-            console.log(err);
-        }
-        if (user) {
-            console.log("returning user...");
-            res.json(user);
-        } else {
-            res.json({success: false, msg: 'User not found'});
-        }
-    });
-});
-
+require('./routes/user')(apiRouter);
+require('./routes/index')(app);
 app.use('/api', apiRouter);
-
-app.get('/', function (req, res) {
-    res.render('index', {
-        title: 'Docker Node App',
-        msg: 'Hello world from Docker'
-    });
-});
 
 app.listen(config.port, function () {
     console.log("App running in container on port " + config.port);
