@@ -13,6 +13,7 @@ db.once('open', function () {
 });
 
 var apiRouter = express.Router();
+require('./routes/dbutil')(apiRouter);
 require('./routes/user')(apiRouter);
 require('./routes/index')(app);
 app.use('/api', apiRouter);
