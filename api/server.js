@@ -4,7 +4,6 @@ var config = require('./config');
 
 var app = require('./app');
 
-
 mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
@@ -19,5 +18,5 @@ require('./routes/index')(app);
 app.use('/api', apiRouter);
 
 app.listen(config.port, function () {
-    console.log("App running in container on port " + config.port);
+    console.log('App running in container on port ' + config.port);
 });

@@ -8,7 +8,7 @@ module.exports = function (apiRouter) {
                 console.log(err);
             }
             if (users) {
-                console.log("returning all users...");
+                console.log('returning all users...');
                 res.json(users);
             } else {
                 res.json({success: false, msg: 'No users in database'});
@@ -22,7 +22,7 @@ module.exports = function (apiRouter) {
                 console.log(err);
             }
             if (user) {
-                console.log("returning user...");
+                console.log('returning user...');
                 res.json(user);
             } else {
                 res.json({success: false, msg: 'User not found'});
