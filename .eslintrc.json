@@ -1,0 +1,21 @@
+{
+    "extends": "eslint:recommended",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "indent": "warn",
+        "curly": "warn",
+        "eqeqeq": "warn",
+        "no-console": "off",
+        "object-curly-spacing": "warn",
+        "quotes": ["warn", "single"],
+        "space-before-function-paren": ["warn", {
+            "anonymous": "always",
+            "named": "never"
+        }],
+        "spaced-comment": "warn",
+        "brace-style": "warn"
+    }
+}
