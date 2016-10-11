@@ -3,8 +3,8 @@ var config = require('../config');
 
 module.exports = function (apiRouter) {
 
-    apiRouter.get('/seeddatabase', function (req, res) {
-        var secret = req.query.secret;
+    apiRouter.get('/seeddatabase/:secret', function (req, res) {
+        var secret = req.params.secret;
         console.log('the secret ' + secret);
 
         if (secret === config.seedDBSecret) {
