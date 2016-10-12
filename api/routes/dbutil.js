@@ -1,6 +1,8 @@
 var User = require('../models/user');
 var config = require('../config');
 
+var data = require('../models/data-users.json');
+
 module.exports = function (apiRouter) {
 
     apiRouter.get('/seeddatabase/:secret', function (req, res) {
@@ -36,4 +38,8 @@ module.exports = function (apiRouter) {
 
 function seedDatabase() {
     console.log('creating list of default users in db...');
+    data.forEach(function (user) {
+        console.log('Logging each user \n');
+        console.log(user);
+    });
 }
