@@ -7,7 +7,7 @@
             "password": "pa$$w0rd"
         },
         "admin": true,
-        "dateCreated": ISODate("2016-09-12T00:00:00Z")
+        "createdDate": ISODate("2016-09-12T00:00:00Z")
     },
     {
         "name": "Bruce Wayne",
@@ -17,7 +17,7 @@
             "password": "pa$$w0rd"
         },
         "admin": false,
-        "dateCreated": ISODate("2016-09-14T00:00:00Z")
+        "createdDate": ISODate("2016-09-14T00:00:00Z")
     },
     {
         "name": "Tony Stark",
@@ -27,7 +27,7 @@
             "password": "pa$$w0rd"
         },
         "admin": true,
-        "dateCreated": ISODate("2016-09-17T00:00:00Z")
+        "createdDate": ISODate("2016-09-17T00:00:00Z")
     },
     {
         "name": "Barry Allen",
@@ -37,6 +37,6 @@
             "password": "pa$$w0rd"
         },
         "admin": false,
-        "dateCreated": ISODate("2016-09-20T00:00:00Z")
+        "createdDate": ISODate("2016-09-20T00:00:00Z")
     }
 ]

@@ -6,7 +6,8 @@
             "username": "superman",
             "password": "pa$$w0rd"
         },
-        "admin": true
+        "admin": true,
+        "createdDate": "2016-09-12"
     },
     {
         "name": "Bruce Wayne",
@@ -15,7 +16,8 @@
             "username": "batman",
             "password": "pa$$w0rd"
         },
-        "admin": false
+        "admin": false,
+        "createdDate": "2016-09-14"
     },
     {
         "name": "Tony Stark",
@@ -24,7 +26,8 @@
             "username": "ironman",
             "password": "pa$$w0rd"
         },
-        "admin": true
+        "admin": true,
+        "createdDate": "2016-09-17"
     },
     {
         "name": "Barry Allen",
@@ -33,6 +36,7 @@
             "username": "theflash",
             "password": "pa$$w0rd"
         },
-        "admin": false
+        "admin": false,
+        "createdDate": "2016-09-20"
     }
 ]

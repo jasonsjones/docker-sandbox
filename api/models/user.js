@@ -9,7 +9,7 @@ var userSchema = new Schema({
         password: {type: String}
     },
     admin: {type: Boolean, default: false},
-    dateCreated: {type: Date, default: Date.now()}
+    createdDate: {type: Date, default: Date.now()}
 });
 
 var User = mongoose.model('User', userSchema);
