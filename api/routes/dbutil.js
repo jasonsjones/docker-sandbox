@@ -7,7 +7,6 @@ module.exports = function (apiRouter) {
 
     apiRouter.get('/seeddatabase/:secret', function (req, res) {
         var secret = req.params.secret;
-        console.log('the secret ' + secret);
 
         if (secret === config.seedDBSecret) {
             User.find({}, function (err, collection) {
@@ -20,10 +19,17 @@ module.exports = function (apiRouter) {
                 }
 
                 if (collection && collection.length === 0) {
-                    seedDatabase();
+                    seedDatabase().then(function (result) {
+                        if (result.success) {
+                            res.json(result);
+                        }
+                    }, function (err) {
+                        res.json(err);
+                    });
+                } else {
                     res.json({
                         success: true,
-                        msg: 'seeded database'
+                        msg: 'database already contains a collection'
                     });
                 }
             });
@@ -37,9 +43,23 @@ module.exports = function (apiRouter) {
 }
 
 function seedDatabase() {
-    console.log('creating list of default users in db...');
-    data.forEach(function (user) {
-        console.log('Logging each user \n');
-        console.log(user);
+    return new Promise(function (resolve, reject) {
+        data.forEach(function (user, idx, arr) {
+            user.createdDate = new Date(user.createdDate);
+            User.create(user, function (err) {
+                if (err) {
+                    reject({
+                        success: false,
+                        msg: 'error seeding database'
+                    });
+                }
+                if (idx === arr.length - 1) {
+                    resolve({
+                        success: true,
+                        msg: 'database seeded with a Promise'
+                    });
+                }
+            });
+        });
     });
 }
