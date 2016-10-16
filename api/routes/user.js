@@ -2,20 +2,33 @@ var User = require('../models/user');
 
 module.exports = function (apiRouter) {
 
-    apiRouter.get('/users', function (req, res) {
-        User.find({}, function (err, users) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            if (users) {
-                console.log('returning all users...');
-                res.json(users);
-            } else {
-                res.json({success: false, msg: 'No users in database'});
-            }
+    apiRouter.route('/users')
+        .get(function (req, res) {
+            User.find({}, function (err, users) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                if (users) {
+                    console.log('returning all users...');
+                    res.json(users);
+                } else {
+                    res.json({success: false, msg: 'No users in database'});
+                }
+            });
+        })
+        .post(function (req, res) {
+            var newUser = new User(req.body);
+
+            newUser.save(function (err, user) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                res.json({success: true,
+                          user: user});
+            });
         });
-    });
 
     apiRouter.route('/user/:id')
         .get(function (req, res) {
@@ -45,18 +58,4 @@ module.exports = function (apiRouter) {
                 }
             });
         });
-
-    apiRouter.post('/users', function (req, res) {
-        var newUser = new User(req.body);
-
-        newUser.save(function (err, user) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-
-            res.json({success: true,
-                      user: user});
-        });
-    });
 };
