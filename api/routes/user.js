@@ -29,4 +29,17 @@ module.exports = function (apiRouter) {
             }
         });
     });
+
+    apiRouter.post('/users', function (req, res) {
+        var newUser = new User(req.body);
+
+        newUser.save(function (err, user) {
+            if (err) {
+                console.log(err);
+            }
+
+            res.json({success: true,
+                      user: user});
+        })
+    })
 };

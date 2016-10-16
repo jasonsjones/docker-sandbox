@@ -1,12 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var defaultPassword = 'p@ssw0rd';
+
 var userSchema = new Schema({
     name: {type: String},
     email: {type: String},
     local: {
         username: {type: String},
-        password: {type: String}
+        password: {type: String, default: defaultPassword}
     },
     admin: {type: Boolean, default: false},
     createdDate: {type: Date, default: Date.now()}
