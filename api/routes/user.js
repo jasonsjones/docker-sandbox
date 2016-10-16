@@ -6,6 +6,7 @@ module.exports = function (apiRouter) {
         User.find({}, function (err, users) {
             if (err) {
                 console.log(err);
+                return;
             }
             if (users) {
                 console.log('returning all users...');
@@ -16,19 +17,34 @@ module.exports = function (apiRouter) {
         });
     });
 
-    apiRouter.get('/user/:id', function (req, res) {
-        User.findById(req.params.id, function (err, user) {
-            if (err) {
-                console.log(err);
-            }
-            if (user) {
-                console.log('returning user...');
-                res.json(user);
-            } else {
-                res.json({success: false, msg: 'User not found'});
-            }
+    apiRouter.route('/user/:id')
+        .get(function (req, res) {
+            User.findById(req.params.id, function (err, user) {
+                if (err) {
+                    console.log(err);
+                    return;
+                }
+                if (user) {
+                    console.log('returning user...');
+                    res.json(user);
+                } else {
+                    res.json({success: false, msg: 'User not found'});
+                }
+            });
+        })
+        .delete(function (req, res) {
+            User.findByIdAndRemove(req.params.id, function (err) {
+                if (err) {
+                    console.log(err);
+                    return;
+                } else {
+                    res.json({
+                        success: true,
+                        msg: 'User deleted'
+                    });
+                }
+            });
         });
-    });
 
     apiRouter.post('/users', function (req, res) {
         var newUser = new User(req.body);
@@ -36,10 +52,11 @@ module.exports = function (apiRouter) {
         newUser.save(function (err, user) {
             if (err) {
                 console.log(err);
+                return;
             }
 
             res.json({success: true,
                       user: user});
-        })
-    })
+        });
+    });
 };
