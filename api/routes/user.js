@@ -45,6 +45,70 @@ module.exports = function (apiRouter) {
                 }
             });
         })
+        .put(function (req, res) {
+            User.findById(req.params.id, function (err, user) {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    console.log(req.body);
+                    user.name = req.body.name;
+                    user.email = req.body.email;
+                    user.admin = req.body.admin;
+                    if (req.body.local) {
+                        user.local = {
+                            username: req.body.local.username || '',
+                            password: req.body.local.password || ''
+                        }
+                    }
+
+                    user.save(function (err, updatedUser) {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            res.json({
+                                success: true,
+                                msg: 'user [PUT] updated',
+                                user: updatedUser
+                            });
+                        }
+                    });
+                }
+            });
+        })
+        .patch(function (req, res) {
+            User.findById(req.params.id, function (err, user) {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    if (req.body._id) {
+                        delete req.body._id;
+                    }
+
+                    for (var p in req.body) {
+
+                        if (p === 'local') {
+                            for (var q in req.body['local']) {
+                                user['local'][q] = req.body['local'][q];
+                            }
+                        }
+                        user[p] = req.body[p];
+                    }
+
+                    user.save(function (err, updatedUser) {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            res.json({
+                                success: true,
+                                msg: 'user [PATCH] updated',
+                                user: updatedUser
+                            });
+                        }
+                    });
+                }
+            });
+
+        })
         .delete(function (req, res) {
             User.findByIdAndRemove(req.params.id, function (err) {
                 if (err) {
