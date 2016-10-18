@@ -30,20 +30,25 @@ module.exports = function (apiRouter) {
             });
         });
 
+    apiRouter.use('/user/:id', function (req, res, next) {
+        User.findById(req.params.id, function (err, user) {
+            if (err) {
+                res.status(500).send(err);
+            } else if (user) {
+                req.user = user;
+                next();
+            } else {
+                res.status(404).json({
+                    success: false,
+                    msg: 'User not found'
+                });
+            }
+        })
+    });
+
     apiRouter.route('/user/:id')
         .get(function (req, res) {
-            User.findById(req.params.id, function (err, user) {
-                if (err) {
-                    console.log(err);
-                    return;
-                }
-                if (user) {
-                    console.log('returning user...');
-                    res.json(user);
-                } else {
-                    res.json({success: false, msg: 'User not found'});
-                }
-            });
+            res.json(req.user);
         })
         .put(function (req, res) {
             User.findById(req.params.id, function (err, user) {
