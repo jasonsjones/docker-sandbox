@@ -54,79 +54,61 @@ module.exports = function (apiRouter) {
             res.json(req.user);
         })
         .put(function (req, res) {
-            User.findById(req.params.id, function (err, user) {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    user.name = req.body.name;
-                    user.email = req.body.email;
-                    user.admin = req.body.admin;
-
-                    // TODO: figure out better way to update local
-                    // username/password
-
-                    user.save(function (err, updatedUser) {
-                        if (err) {
-                            res.status(500).send(err);
-                        } else {
-                            res.json({
-                                success: true,
-                                msg: 'user [PUT] updated',
-                                user: updatedUser
-                            });
-                        }
-                    });
-                }
-            });
-        })
-        .patch(function (req, res) {
-            User.findById(req.params.id, function (err, user) {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    if (req.body._id) {
-                        delete req.body._id;
-                    }
-
-                    // don't want the user to update their password in this
-                    // PATCH route.
-                    // TODO: implement password update as it own POST route.
-                    if (req.body.local && req.body.local.password) {
-                        delete req.body.local.password;
-                    }
-
-                    for (var p in req.body) {
-                        if (p === 'local') {
-                            for (var q in req.body['local']) {
-                                user['local'][q] = req.body['local'][q];
-                            }
-                        }
-                        user[p] = req.body[p];
-                    }
-
-                    user.save(function (err, updatedUser) {
-                        if (err) {
-                            res.status(500).send(err);
-                        } else {
-                            res.json({
-                                success: true,
-                                msg: 'user [PATCH] updated',
-                                user: updatedUser
-                            });
-                        }
-                    });
-                }
-            });
-
-        })
-        .delete(function (req, res) {
-            User.findByIdAndRemove(req.params.id, function (err) {
+            req.user.name = req.body.name;
+            req.user.email = req.body.email;
+            req.user.admin = req.body.admin;
+            req.user.save(function (err, updatedUser) {
                 if (err) {
                     res.status(500).send(err);
                 } else {
                     res.json({
                         success: true,
-                        msg: 'User deleted'
+                        msg: 'user [PUT] updated',
+                        user: updatedUser
+                    });
+                }
+            });
+        })
+        .patch(function (req, res) {
+            if (req.body._id) {
+                delete req.body._id;
+            }
+            // don't want the user to update their password in this
+            // PATCH route.
+            // TODO: implement password update as it own POST route.
+            if (req.body.local && req.body.local.password) {
+                delete req.body.local.password;
+            }
+            for (var p in req.body) {
+                if (p === 'local') {
+                    for (var q in req.body['local']) {
+                        req.user['local'][q] = req.body['local'][q];
+                    }
+                }
+                req.user[p] = req.body[p];
+            }
+
+            req.user.save(function (err, updatedUser) {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.json({
+                        success: true,
+                        msg: 'user [PATCH] updated',
+                        user: updatedUser
+                    });
+                }
+            });
+        })
+        .delete(function (req, res) {
+            req.user.remove(function (err, deletedUser) {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.json({
+                        success: true,
+                        msg: 'User deleted',
+                        user: deletedUser
                     });
                 }
             });
