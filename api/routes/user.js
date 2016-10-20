@@ -113,4 +113,12 @@ module.exports = function (apiRouter) {
                 }
             });
         });
+
+    apiRouter.post('/login', function (req, res) {
+        console.log(req.body);
+        res.json({
+            success: true,
+            msg: 'Login successful.  But no user...'
+        });
+    });
 };
