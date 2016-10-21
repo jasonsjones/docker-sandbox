@@ -116,9 +116,25 @@ module.exports = function (apiRouter) {
 
     apiRouter.post('/login', function (req, res) {
         console.log(req.body);
-        res.json({
-            success: true,
-            msg: 'Login successful.  But no user...'
-        });
+        User.find({'local.username': req.body.username}, function (err, user) {
+            if (err) {
+                res.status(500).send(err);
+            }
+
+            if (user) {
+                res.json({
+                    success: true,
+                    msg: 'Login successful.',
+                    user: user
+                });
+            } else {
+                res.json({
+                    success: false,
+                    msg: 'User not found.',
+                    user: null
+                });
+
+            }
+        })
     });
 };
