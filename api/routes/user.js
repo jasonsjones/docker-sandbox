@@ -122,11 +122,14 @@ module.exports = function (apiRouter) {
             }
 
             if (user) {
-                res.json({
-                    success: true,
-                    msg: 'Login successful.',
-                    user: user
-                });
+                var attemptedPassword = req.body.local.password;
+                if (attemptedPassword && user.verifyPassword(attemptedPassword)) {
+                    res.json({
+                        success: true,
+                        msg: 'Login successful.',
+                        user: user
+                    });
+                }
             } else {
                 res.json({
                     success: false,

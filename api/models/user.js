@@ -14,4 +14,8 @@ var userSchema = new Schema({
     createdDate: {type: Date, default: Date.now()}
 });
 
+userSchema.methods.verifyPassword = function (password) {
+    return this.local.password === password;
+}
+
 module.exports = mongoose.model('User', userSchema);
