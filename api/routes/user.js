@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var userController = require('../controllers/user');
 
 module.exports = function (apiRouter) {
 
@@ -33,21 +34,7 @@ module.exports = function (apiRouter) {
     // middleware to run each time /user/:id is hit.
     // this will find the user by id and assign it to req.user
     // where each other routes downstream will have access to.
-    apiRouter.use('/user/:id', function (req, res, next) {
-        User.findById(req.params.id, function (err, user) {
-            if (err) {
-                res.status(500).send(err);
-            } else if (user) {
-                req.user = user;
-                next();
-            } else {
-                res.status(404).json({
-                    success: false,
-                    msg: 'User not found'
-                });
-            }
-        })
-    });
+    apiRouter.use('/user/:id', userController.findById);
 
     apiRouter.route('/user/:id')
         .get(function (req, res) {
