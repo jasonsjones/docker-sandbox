@@ -14,4 +14,29 @@ exports.findById = function (req, res, next) {
             });
         }
     });
-}
+};
+
+exports.getAllUsers = function (req, res) {
+    User.find({}, function (err, users) {
+        if (err) {
+            res.status(500).send(err);
+        }
+        if (users) {
+            res.json(users);
+        } else {
+            res.json({success: false, msg: 'No users in database'});
+        }
+    });
+};
+
+exports.addUser = function (req, res) {
+    var newUser = new User(req.body);
+
+    newUser.save(function (err, user) {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.json({success: true,
+                  user: user});
+    });
+};
