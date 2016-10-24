@@ -7,6 +7,9 @@ module.exports = function (apiRouter) {
         .get(userController.getAllUsers)
         .post(userController.addUser);
 
+    apiRouter.route('/users/admin')
+        .get(userController.getAdminUsers);
+
     // middleware to run each time /user/:id is hit.
     // this will find the user by id and assign it to req.user
     // where each other routes downstream will have access to.

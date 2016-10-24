@@ -40,3 +40,13 @@ exports.addUser = function (req, res) {
                   user: user});
     });
 };
+
+exports.getAdminUsers = function (req, res) {
+    User.find({admin: true}, function (err, admins) {
+        if (err) {
+            res.status(500).send(err);
+        }
+
+        res.json(admins);
+    })
+};
