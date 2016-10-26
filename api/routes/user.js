@@ -13,7 +13,7 @@ module.exports = function (apiRouter) {
     // middleware to run each time /user/:id is hit.
     // this will find the user by id and assign it to req.user
     // where each other routes downstream will have access to.
-    apiRouter.use('/user/:id', userController.findById);
+    apiRouter.use('/user/:id', userController.findUserById);
 
     apiRouter.route('/user/:id')
         .get(function (req, res) {

@@ -1,6 +1,6 @@
 var User = require('../models/user');
 
-exports.findById = function (req, res, next) {
+exports.findUserById = function (req, res, next) {
     User.findById(req.params.id, function (err, user) {
         if (err) {
             res.status(500).send(err);
@@ -49,4 +49,8 @@ exports.getAdminUsers = function (req, res) {
 
         res.json(admins);
     })
+};
+
+exports.getSingleUser = function (req, res) {
+    res.json(req.user);
 };
