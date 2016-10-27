@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var todoSchema = new Schema({
     item: {type: String},
-    completed: {type: Boolean},
+    completed: {type: Boolean, default: false},
     createdDate: {type: Date, default: Date.now()},
     modifiedDate: {type: Date, default: null},
     dueDate: {type: Date, default: null},
