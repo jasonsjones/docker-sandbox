@@ -8,6 +8,7 @@ require('./dbconnection')(config);
 var apiRouter = express.Router();
 require('./routes/dbutil')(apiRouter);
 require('./routes/user')(apiRouter);
+require('./routes/todo')(apiRouter);
 require('./routes/index')(app);
 app.use('/api', apiRouter);
 
