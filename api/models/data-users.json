@@ -1,42 +1,62 @@
 [
     {
-        "name": "Clark Kent",
+        "name": {
+            "first": "Clark",
+            "last": "Kent"
+        },
         "email": "clark@dailyplanet.com",
         "local": {
-            "username": "superman",
-            "password": "pa$$w0rd"
+            "username": "superman"
         },
         "admin": true,
         "createdDate": "2016-09-12"
     },
     {
-        "name": "Bruce Wayne",
+        "name": {
+            "first": "Bruce",
+            "last": "Wayne"
+        },
         "email": "bruce@wayneenterprises.com",
         "local": {
-            "username": "batman",
-            "password": "pa$$w0rd"
+            "username": "batman"
         },
         "admin": false,
         "createdDate": "2016-09-14"
     },
     {
-        "name": "Tony Stark",
+        "name": {
+            "first": "Tony",
+            "last": "Stark"
+        },
         "email": "tony@starklabs.com",
         "local": {
-            "username": "ironman",
-            "password": "pa$$w0rd"
+            "username": "ironman"
         },
         "admin": true,
         "createdDate": "2016-09-17"
     },
     {
-        "name": "Barry Allen",
+        "name": {
+            "first": "Barry",
+            "last": "Allen"
+        },
         "email": "barry@starzlabs.com",
         "local": {
-            "username": "theflash",
-            "password": "pa$$w0rd"
+            "username": "theflash"
         },
         "admin": false,
         "createdDate": "2016-09-20"
+    },
+    {
+        "name": {
+            "first": "Bruce",
+            "last": "Banner"
+        },
+        "email": "bruce@pantheon",
+        "local": {
+            "username": "hulk"
+        },
+        "admin": false,
+        "createdDate": "2016-10-28"
     }
 ]

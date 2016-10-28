@@ -4,7 +4,10 @@ var Schema = mongoose.Schema;
 var defaultPassword = 'p@ssw0rd';
 
 var userSchema = new Schema({
-    name: {type: String},
+    name: {
+        first: {type: String},
+        last: {type: String}
+    },
     email: {type: String},
     local: {
         username: {type: String},
@@ -13,6 +16,16 @@ var userSchema = new Schema({
     admin: {type: Boolean, default: false},
     createdDate: {type: Date, default: Date.now()}
 });
+
+userSchema.virtual('name.full').get(function () {
+    return this.name.first + ' ' + this.name.last;
+});
+
+userSchema.virtual('local.isUsingDefaultPwd').get(function () {
+    return this.local.password === defaultPassword;
+});
+
+userSchema.set('toJSON', {virtuals: true});
 
 userSchema.methods.verifyPassword = function (password) {
     return this.local.password === password;
