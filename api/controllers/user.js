@@ -59,3 +59,66 @@ exports.getAdminUsers = function (req, res) {
 exports.getSingleUser = function (req, res) {
     res.json(req.user);
 };
+
+exports.updateUser = function (req, res) {
+    req.user.name = req.body.name;
+    req.user.email = req.body.email;
+    req.user.admin = req.body.admin;
+    req.user.save(function (err, updatedUser) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json({
+                success: true,
+                msg: 'user [PUT] updated',
+                user: updatedUser
+            });
+        }
+    });
+};
+
+exports.patchUser = function (req, res) {
+    if (req.body._id) {
+        delete req.body._id;
+    }
+    // don't want the user to update their password in this
+    // PATCH route.
+    // TODO: implement password update as it own POST route.
+    if (req.body.local && req.body.local.password) {
+        delete req.body.local.password;
+    }
+    for (var p in req.body) {
+        if (p === 'local') {
+            for (var q in req.body['local']) {
+                req.user['local'][q] = req.body['local'][q];
+            }
+        }
+        req.user[p] = req.body[p];
+    }
+
+    req.user.save(function (err, updatedUser) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json({
+                success: true,
+                msg: 'user [PATCH] updated',
+                user: updatedUser
+            });
+        }
+    });
+};
+
+exports.deleteUser = function (req, res) {
+    req.user.remove(function (err, deletedUser) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json({
+                success: true,
+                msg: 'User deleted',
+                user: deletedUser
+            });
+        }
+    });
+};
