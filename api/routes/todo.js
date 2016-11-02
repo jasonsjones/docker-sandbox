@@ -9,5 +9,6 @@ module.exports = function (apiRouter) {
     apiRouter.use('/todo/:id', todoController.findTodoById);
 
     apiRouter.route('/todo/:id')
-        .get(todoController.getSingleTodo);
+        .get(todoController.getSingleTodo)
+        .delete(todoController.deleteTodo);
 };

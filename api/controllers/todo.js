@@ -49,3 +49,17 @@ exports.addTodo = function (req, res) {
 exports.getSingleTodo = function (req, res) {
     res.json(req.todo);
 };
+
+exports.deleteTodo = function (req, res) {
+    req.todo.remove(function (err, deletedTodo) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json({
+                success: true,
+                msg: 'Todo deleted',
+                todo: deletedTodo
+            });
+        }
+    });
+}
