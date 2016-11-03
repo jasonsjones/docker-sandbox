@@ -10,5 +10,6 @@ module.exports = function (apiRouter) {
 
     apiRouter.route('/todo/:id')
         .get(todoController.getSingleTodo)
+        .put(todoController.updateTodo)
         .delete(todoController.deleteTodo);
 };

@@ -50,6 +50,25 @@ exports.getSingleTodo = function (req, res) {
     res.json(req.todo);
 };
 
+exports.updateTodo = function (req, res) {
+    req.todo.item = req.body.item;
+    req.todo.completed = req.body.completed;
+    req.todo.dueDate = req.body.dueDate;
+    req.todo.createdBy = req.body.createdBy;
+    req.todo.note = req.body.note;
+    req.todo.save(function (err, updatedTodo) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json({
+                success: true,
+                msg: 'todo [PUT] updated',
+                todo: updatedTodo
+            });
+        }
+    });
+};
+
 exports.deleteTodo = function (req, res) {
     req.todo.remove(function (err, deletedTodo) {
         if (err) {
@@ -62,4 +81,4 @@ exports.deleteTodo = function (req, res) {
             });
         }
     });
-}
+};
