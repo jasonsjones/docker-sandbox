@@ -69,6 +69,27 @@ exports.updateTodo = function (req, res) {
     });
 };
 
+exports.patchTodo = function (req, res) {
+    if (req.body._id) {
+        delete req.body._id;
+    }
+    for (var p in req.body) {
+        req.todo[p] = req.body[p];
+    }
+
+    req.todo.save(function (err, updatedTodo) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json({
+                success: true,
+                msg: 'todo [PATCH] updated',
+                todo: updatedTodo
+            });
+        }
+    });
+};
+
 exports.deleteTodo = function (req, res) {
     req.todo.remove(function (err, deletedTodo) {
         if (err) {
