@@ -1,65 +1,42 @@
 var User = require('../models/user');
-var config = require('../config');
-
-var data = require('../models/data-users.json');
+var Todo = require('../models/todo');
+var dbUtilController = require('../controllers/dbutil');
 
 module.exports = function (apiRouter) {
 
-    apiRouter.get('/seeddatabase/:secret', function (req, res) {
-        var secret = req.params.secret;
+    apiRouter.get('/seeddatabase/:secret', dbUtilController.seedUsers);
 
-        if (secret === config.seedDBSecret) {
-            User.find({}, function (err, collection) {
+    apiRouter.get('/seeddatabase/todo/:username', function (req, res) {
+        User.findOne({'local.username': req.params.username})
+            .exec(function (err, user) {
                 if (err) {
-                    console.log('we have an error getting the users');
-                    res.json({
-                        success: false,
-                        msg: 'error getting the user collection'
-                    });
+                    res.status(500).send(err);
                 }
-
-                if (collection && collection.length === 0) {
-                    seedDatabase().then(function (result) {
-                        if (result.success) {
-                            res.json(result);
-                        }
-                    }, function (err) {
-                        res.json(err);
-                    });
-                } else {
+                switch (user.local.username) {
+                case 'superman':
+                    seedSupermanTodos(res, user);
+                    break;
+                default:
                     res.json({
                         success: true,
-                        msg: 'database already contains a collection'
+                        msg: 'no todos added, user not found'
                     });
                 }
             });
-        } else {
-            res.json({
-                success: false,
-                msg: 'incorrect secret provided'
-            });
-        }
     });
 }
 
-function seedDatabase() {
-    return new Promise(function (resolve, reject) {
-        data.forEach(function (user, idx, arr) {
-            user.createdDate = new Date(user.createdDate);
-            User.create(user, function (err) {
-                if (err) {
-                    reject({
-                        success: false,
-                        msg: 'error seeding database'
-                    });
-                }
-                if (idx === arr.length - 1) {
-                    resolve({
-                        success: true,
-                        msg: 'database seeded with a Promise'
-                    });
-                }
-            });
+function seedSupermanTodos(res, user) {
+    Todo.create({
+        item: 'Save Metropolis from all evil villians',
+        createdBy: user._id
+    }, function (err) {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.json({
+            success: true,
+            msg: 'todos seeded for superman'
         });
     });
 }
