@@ -1,5 +1,5 @@
 var User = require('../models/user');
-// var Todo = require('../models/todo');
+var Todo = require('../models/todo');
 var config = require('../config');
 var data = require('../models/data-users.json');
 
@@ -39,6 +39,25 @@ exports.seedUsers = function (req, res) {
     }
 };
 
+exports.seedSupermanTodos = function (req, res) {
+    User.findOne({'local.username': req.params.username})
+        .exec(function (err, user) {
+            if (err) {
+                res.status(500).send(err);
+            }
+            switch (user.local.username) {
+            case 'superman':
+                seedSupermanTodos(res, user);
+                break;
+            default:
+                res.json({
+                    success: true,
+                    msg: 'no todos added, user not found'
+                });
+            }
+        });
+};
+
 // utility functions
 function seedDatabase() {
     return new Promise(function (resolve, reject) {
@@ -58,6 +77,36 @@ function seedDatabase() {
                     });
                 }
             });
+        });
+    });
+}
+
+function seedSupermanTodos(res, user) {
+    var superTodos = [
+        {
+            item: 'Save Metropolis from all evil villians',
+            createdBy: user._id
+        },
+        {
+            item: 'Stay away from kryptonite',
+            createdBy: user._id
+        },
+        {
+            item: 'Get big scoop for the Daily Planet',
+            createdBy: user._id
+        },
+        {
+            item: 'Ask Lois out on a date',
+            createdBy: user._id
+        }
+    ];
+    Todo.create(superTodos, function (err) {
+        if (err) {
+            res.status(500).send(err);
+        }
+        res.json({
+            success: true,
+            msg: 'todos seeded for superman'
         });
     });
 }
