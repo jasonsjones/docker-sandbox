@@ -39,7 +39,7 @@ exports.seedUsers = function (req, res) {
     }
 };
 
-exports.seedSupermanTodos = function (req, res) {
+exports.seedTodos = function (req, res) {
     User.findOne({'local.username': req.params.username})
         .exec(function (err, user) {
             if (err) {
@@ -48,6 +48,9 @@ exports.seedSupermanTodos = function (req, res) {
             switch (user.local.username) {
             case 'superman':
                 seedSupermanTodos(res, user);
+                break;
+            case 'batman':
+                seedBatmanTodos(res, user);
                 break;
             default:
                 res.json({
@@ -82,13 +85,14 @@ function seedDatabase() {
 }
 
 function seedSupermanTodos(res, user) {
-    var superTodos = [
+    var supermanTodos = [
         {
             item: 'Save Metropolis from all evil villians',
             createdBy: user._id
         },
         {
             item: 'Stay away from kryptonite',
+            dueDate: new Date('2017-02-22'),
             createdBy: user._id
         },
         {
@@ -100,13 +104,44 @@ function seedSupermanTodos(res, user) {
             createdBy: user._id
         }
     ];
-    Todo.create(superTodos, function (err) {
+    createTodos(res, supermanTodos, user);
+}
+
+function seedBatmanTodos(res, user) {
+    var batmanTodos = [
+        {
+            item: 'Save Gotham from all evil villians',
+            dueDate: new Date('2016-12-16'),
+            createdBy: user._id
+        },
+        {
+            item: 'Give Robin a raise',
+            dueDate: new Date('2017-01-17'),
+            createdBy: user._id
+        },
+        {
+            item: 'Send the Joker a Christmas card',
+            dueDate: new Date('2016-12-21'),
+            createdBy: user._id
+        },
+        {
+            item: 'Remodel the Bat cave',
+            completed: true,
+            createdBy: user._id
+        }
+    ];
+    createTodos(res, batmanTodos, user);
+}
+
+function createTodos(res, todos, user) {
+    Todo.create(todos, function (err) {
         if (err) {
             res.status(500).send(err);
         }
         res.json({
             success: true,
-            msg: 'todos seeded for superman'
+            msg: 'todos seeded for ' + user.local.username
         });
     });
+
 }
