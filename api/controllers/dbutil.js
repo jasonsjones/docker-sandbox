@@ -85,51 +85,12 @@ function seedDatabase() {
 }
 
 function seedSupermanTodos(res, user) {
-    var supermanTodos = [
-        {
-            item: 'Save Metropolis from all evil villians',
-            createdBy: user._id
-        },
-        {
-            item: 'Stay away from kryptonite',
-            dueDate: new Date('2017-02-22'),
-            createdBy: user._id
-        },
-        {
-            item: 'Get big scoop for the Daily Planet',
-            createdBy: user._id
-        },
-        {
-            item: 'Ask Lois out on a date',
-            createdBy: user._id
-        }
-    ];
+    var supermanTodos = require('../models/data/supermanTodos')(user);
     createTodos(res, supermanTodos, user);
 }
 
 function seedBatmanTodos(res, user) {
-    var batmanTodos = [
-        {
-            item: 'Save Gotham from all evil villians',
-            dueDate: new Date('2016-12-16'),
-            createdBy: user._id
-        },
-        {
-            item: 'Give Robin a raise',
-            dueDate: new Date('2017-01-17'),
-            createdBy: user._id
-        },
-        {
-            item: 'Send the Joker a Christmas card',
-            dueDate: new Date('2016-12-21'),
-            createdBy: user._id
-        },
-        {
-            item: 'Remodel the Bat cave',
-            completed: true,
-            createdBy: user._id
-        }
-    ];
+    var batmanTodos = require('../models/data/batmanTodos')(user);
     createTodos(res, batmanTodos, user);
 }
 
