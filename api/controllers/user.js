@@ -4,7 +4,7 @@ var User = require('../models/user');
 // and then attach the user to the req object, this will make it
 // available to all routes on the /user/:id route
 exports.findUserById = function (req, res, next) {
-    User.findById(req.params.id, function (err, user) {
+    User.findById(req.params.id, '-local.password', function (err, user) {
         if (err) {
             res.status(500).send(err);
         } else if (user) {

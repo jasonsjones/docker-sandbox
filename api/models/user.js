@@ -21,10 +21,6 @@ userSchema.virtual('name.full').get(function () {
     return this.name.first + ' ' + this.name.last;
 });
 
-userSchema.virtual('local.isUsingDefaultPwd').get(function () {
-    return this.local.password === defaultPassword;
-});
-
 userSchema.set('toJSON', {virtuals: true});
 
 userSchema.methods.verifyPassword = function (password) {
