@@ -19,6 +19,7 @@
             "named": "never"
         }],
         "spaced-comment": "warn",
+        "semi": ["error", "always"],
         "brace-style": "warn"
     }
 }
