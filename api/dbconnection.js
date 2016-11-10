@@ -10,4 +10,4 @@ module.exports = function (config) {
         console.log('We are connected to mongo container');
     });
 
-}
+};

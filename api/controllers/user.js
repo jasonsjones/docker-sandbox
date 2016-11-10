@@ -53,7 +53,7 @@ exports.getAdminUsers = function (req, res) {
         }
 
         res.json(admins);
-    })
+    });
 };
 
 exports.getSingleUser = function (req, res) {

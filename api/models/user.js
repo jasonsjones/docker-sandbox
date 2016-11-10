@@ -25,6 +25,6 @@ userSchema.set('toJSON', {virtuals: true});
 
 userSchema.methods.verifyPassword = function (password) {
     return this.local.password === password;
-}
+};
 
 module.exports = mongoose.model('User', userSchema);
