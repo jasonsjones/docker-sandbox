@@ -1,3 +1,4 @@
+var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -24,7 +25,15 @@ userSchema.virtual('name.full').get(function () {
 userSchema.set('toJSON', {virtuals: true});
 
 userSchema.methods.verifyPassword = function (password) {
-    return this.local.password === password;
+    return bcrypt.compareSync(password, this.local.password);
+};
+
+userSchema.methods.hashDefaultPassword = function () {
+    var password = this.local.password;
+    if (password === defaultPassword) {
+        var salt = bcrypt.genSaltSync(10);
+        return bcrypt.hashSync(this.local.password, salt);
+    }
 };
 
 module.exports = mongoose.model('User', userSchema);
