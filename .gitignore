@@ -3,3 +3,4 @@ data/db/
 .config/
 .bash_history
 npm-debug.log
+.npm/
