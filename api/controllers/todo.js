@@ -39,6 +39,7 @@ exports.addTodo = function (req, res) {
         if (err) {
             res.status(500).send(err);
         }
+        res.status(201);
         res.json({
             success: true,
             todo: todo
