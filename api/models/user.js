@@ -36,4 +36,10 @@ userSchema.methods.hashDefaultPassword = function () {
     }
 };
 
+userSchema.methods.toJSONObj = function () {
+    var user = this.toObject();
+    delete user.local.password;
+    return user;
+};
+
 module.exports = mongoose.model('User', userSchema);
