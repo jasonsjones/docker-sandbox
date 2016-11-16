@@ -33,6 +33,8 @@ userSchema.methods.hashDefaultPassword = function () {
     if (password === defaultPassword) {
         var salt = bcrypt.genSaltSync(10);
         return bcrypt.hashSync(this.local.password, salt);
+    } else {
+        return this.local.password;
     }
 };
 

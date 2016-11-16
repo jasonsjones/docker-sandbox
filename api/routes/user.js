@@ -67,17 +67,28 @@ module.exports = function (apiRouter) {
     function hashPasswords(users) {
         return new Promise(function (resolve, reject) {
             users.forEach(function (user, idx, arr) {
+                // check out the current password and what the hash of that
+                // password would be
                 console.log(user.name.full);
                 console.log(user.local.password);
                 console.log(user.hashDefaultPassword());
+                
+                // save the hash of the default password for user: jsjones
+                if (user.local.username === 'jsjones') {
+                    user.local.password = user.hashDefaultPassword();
+                    user.save(function (err) {
+                        if (err) {
+                            reject({success: false,
+                            msg: 'error hashing password',
+                            error: err
+                            });
+                        }
+                    });
+                }
                 if (idx === arr.length - 1) {
                     resolve({success: true,
                              msg: 'passwords hashed with a promise'
                     });
-                }
-
-                if (idx === arr.length) {
-                    reject({success: false});
                 }
             });
 
