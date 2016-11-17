@@ -18,6 +18,19 @@ var userSchema = new Schema({
     createdDate: {type: Date, default: Date.now()}
 });
 
+// execute before each user.save() call
+userSchema.pre('save', function (callback) {
+    var user = this;
+
+    // early return if the password is not modified
+    if (!user.isModified('local.password')) {
+        return callback();
+    }
+
+    // the password has changed, so we need to hash it before saving
+    console.log('this is where the password will be hashed and saved');
+});
+
 userSchema.virtual('name.full').get(function () {
     return this.name.first + ' ' + this.name.last;
 });

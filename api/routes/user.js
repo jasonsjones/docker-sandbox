@@ -76,14 +76,17 @@ module.exports = function (apiRouter) {
                 // save the hash of the default password for user: jsjones
                 if (user.local.username === 'jsjones') {
                     user.local.password = user.hashDefaultPassword();
-                    user.save(function (err) {
-                        if (err) {
-                            reject({success: false,
-                            msg: 'error hashing password',
-                            error: err
-                            });
-                        }
-                    });
+                    if (user.isModified('user.local.password')) {
+                        user.save(function (err) {
+                            console.log('Saving hashed password for ' + user.name.full);
+                            if (err) {
+                                reject({success: false,
+                                msg: 'error hashing password',
+                                error: err
+                                });
+                            }
+                        });
+                    }
                 }
                 if (idx === arr.length - 1) {
                     resolve({success: true,
