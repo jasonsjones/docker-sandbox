@@ -20,7 +20,7 @@ exports.findUserById = function (req, res, next) {
 };
 
 exports.getAllUsers = function (req, res) {
-    User.find({}, function (err, users) {
+    User.find({}, '-local.password', function (err, users) {
         if (err) {
             res.status(500).send(err);
         }
@@ -58,7 +58,7 @@ exports.getAdminUsers = function (req, res) {
 };
 
 exports.getSingleUser = function (req, res) {
-    res.json(req.user);
+    res.json(req.user.toJSONObj());
 };
 
 exports.updateUser = function (req, res) {
