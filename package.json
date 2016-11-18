@@ -4,7 +4,7 @@
     "description": "A sandbox to play with docker, node, and mongo",
     "main": "server.js",
     "scripts": {
-        "test": "mocha tests/*.js",
+        "test-unit": "NODE_ENV=test mocha tests/*.js",
         "start": "nodemon api/server.js",
         "docker:rm": "docker rm $(docker ps -aq)",
         "connect:node": "docker-compose run --rm node /bin/bash",
