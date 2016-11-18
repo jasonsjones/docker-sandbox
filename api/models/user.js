@@ -29,6 +29,7 @@ userSchema.pre('save', function (callback) {
 
     // the password has changed, so we need to hash it before saving
     console.log('this is where the password will be hashed and saved');
+    callback();
 });
 
 userSchema.virtual('name.full').get(function () {

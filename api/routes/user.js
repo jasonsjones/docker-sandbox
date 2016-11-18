@@ -22,18 +22,23 @@ module.exports = function (apiRouter) {
         .delete(userController.deleteUser);
 
     apiRouter.post('/login', function (req, res) {
-        User.find({'local.username': req.body.username}, function (err, user) {
+        User.findOne({'local.username': req.body.username}, function (err, user) {
             if (err) {
                 res.status(500).send(err);
             }
 
             if (user) {
-                var attemptedPassword = req.body.local.password;
+                var attemptedPassword = req.body.password;
                 if (attemptedPassword && user.verifyPassword(attemptedPassword)) {
                     res.json({
                         success: true,
                         msg: 'Login successful.',
                         user: user
+                    });
+                } else {
+                    res.json({
+                        success: false,
+                        msg: 'Login Unsuccessful. Password incorrect.'
                     });
                 }
             } else {
@@ -46,55 +51,4 @@ module.exports = function (apiRouter) {
             }
         });
     });
-
-    apiRouter.get('/users/hashDefaultPasswords', function (req, res) {
-        User.find({}, function (err, users) {
-            if (err) {
-                res.status(500).send(err);
-            }
-            if (users) {
-                console.log('hash the passwords...');
-                hashPasswords(users)
-                    .then(function (result) {
-                        res.json(result);
-                    });
-            } else {
-                res.json({success: false, msg: 'No users in database'});
-            }
-        });
-    });
-
-    function hashPasswords(users) {
-        return new Promise(function (resolve, reject) {
-            users.forEach(function (user, idx, arr) {
-                // check out the current password and what the hash of that
-                // password would be
-                console.log(user.name.full);
-                console.log(user.local.password);
-                console.log(user.hashDefaultPassword());
-                
-                // save the hash of the default password for user: jsjones
-                if (user.local.username === 'jsjones') {
-                    user.local.password = user.hashDefaultPassword();
-                    if (user.isModified('user.local.password')) {
-                        user.save(function (err) {
-                            console.log('Saving hashed password for ' + user.name.full);
-                            if (err) {
-                                reject({success: false,
-                                msg: 'error hashing password',
-                                error: err
-                                });
-                            }
-                        });
-                    }
-                }
-                if (idx === arr.length - 1) {
-                    resolve({success: true,
-                             msg: 'passwords hashed with a promise'
-                    });
-                }
-            });
-
-        });
-    }
 };
