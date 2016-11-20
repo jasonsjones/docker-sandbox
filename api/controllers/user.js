@@ -123,3 +123,34 @@ exports.deleteUser = function (req, res) {
         }
     });
 };
+
+exports.login = function (req, res) {
+    User.findOne({'local.username': req.body.username}, function (err, user) {
+        if (err) {
+            res.status(500).send(err);
+        }
+
+        if (user) {
+            var attemptedPassword = req.body.password;
+            if (attemptedPassword && user.verifyPassword(attemptedPassword)) {
+                res.json({
+                    success: true,
+                    msg: 'Login successful.',
+                    user: user
+                });
+            } else {
+                res.json({
+                    success: false,
+                    msg: 'Login Unsuccessful. Password incorrect.'
+                });
+            }
+        } else {
+            res.json({
+                success: false,
+                msg: 'User not found.',
+                user: null
+            });
+
+        }
+    });
+};
