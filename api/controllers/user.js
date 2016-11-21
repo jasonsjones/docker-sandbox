@@ -1,4 +1,6 @@
 var User = require('../models/user');
+var jwt = require('jsonwebtoken');
+var config = require('../config');
 
 // middleware controller function to find a user by their id
 // and then attach the user to the req object, this will make it
@@ -133,9 +135,13 @@ exports.login = function (req, res) {
         if (user) {
             var attemptedPassword = req.body.password;
             if (attemptedPassword && user.verifyPassword(attemptedPassword)) {
+                var token = jwt.sign(user, config.tokenSecret, {
+                    expiresIn: '24h'
+                });
                 res.json({
                     success: true,
                     msg: 'Login successful.',
+                    token: token,
                     user: user
                 });
             } else {

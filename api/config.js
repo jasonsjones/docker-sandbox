@@ -6,5 +6,6 @@ module.exports = {
     },
 
     port: 3000,
-    seedDBSecret: 'makeitso'
+    seedDBSecret: 'makeitso',
+    tokenSecret: 'jwtIsCoolTech'
 };
