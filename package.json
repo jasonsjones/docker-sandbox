@@ -23,6 +23,7 @@
         "morgan": "^1.7.0"
     },
     "devDependencies": {
+        "browser-sync": "^2.18.2",
         "chai": "^3.5.0",
         "eslint": "^3.7.1",
         "mocha": "^3.1.2",
