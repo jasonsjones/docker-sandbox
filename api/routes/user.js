@@ -1,8 +1,9 @@
 var userController = require('../controllers/user');
+var authController = require('../controllers/auth');
 
 module.exports = function (apiRouter) {
 
-    apiRouter.post('/login', userController.login);
+    apiRouter.post('/login', authController.login);
     
     apiRouter.route('/users')
         .get(userController.getAllUsers)
