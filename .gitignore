@@ -1,6 +1,9 @@
-node_modules/
-data/db/
 .config/
 .bash_history
-npm-debug.log
 .npm/
+node_modules/
+data/db/
+.DS_Store*
+*.log
+*~
+._*
