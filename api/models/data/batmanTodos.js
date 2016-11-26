@@ -22,4 +22,4 @@ module.exports = function (user) {
         }
     ];
     return batmanTodos;
-}
+};
