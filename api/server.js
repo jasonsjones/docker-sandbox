@@ -20,7 +20,7 @@ function listenCallback() {
     console.log('App running (browser sync) in container on port ' + config.port);
     browserSync.init({
         proxy: 'localhost:' + config.port,
-        files: ['index.html', 'app/', 'api/'],
+        files: ['index.html', 'app/**/*.ts', 'api/**/*.js'],
         open: false
     });
 }
