@@ -24,6 +24,7 @@ function listenCallback() {
             'index.html', 
             '../app/**/*.js',
             './**/*.js'],
-        open: false
+        open: false,
+        reloadDelay: 2000
     });
 }
