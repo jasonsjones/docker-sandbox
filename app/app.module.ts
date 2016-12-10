@@ -16,7 +16,7 @@ import { DashboardComponent } from './dashboard.component';
         RouterModule.forRoot([
             {
                 path: '',
-                redirectTo: '/dashboard',
+                redirectTo: 'dashboard',
                 pathMatch: 'full'
             },
             {
@@ -24,7 +24,7 @@ import { DashboardComponent } from './dashboard.component';
                 component: HeroesComponent
             },
             {
-                path: '/dashboard',
+                path: 'dashboard',
                 component: DashboardComponent
             }
         ])
