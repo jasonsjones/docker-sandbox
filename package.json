@@ -27,7 +27,7 @@
     "@angular/platform-browser-dynamic": "~2.0.2",
     "@angular/router": "~3.0.2",
     "@angular/upgrade": "~2.0.2",
-    "angular-in-memory-web-api": "~0.1.5",
+    "angular-in-memory-web-api": "~0.2.0",
     "bootstrap": "^3.3.7",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
