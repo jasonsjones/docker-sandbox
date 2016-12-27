@@ -1,5 +1,4 @@
 var express = require('express');
-var browserSync = require('browser-sync').create();
 var config = require('./config');
 
 var app = require('./app');
@@ -16,15 +15,5 @@ app.use('/api', apiRouter);
 app.listen(config.port, listenCallback);
 
 function listenCallback() {
-    browserSync.watch('api/views/index.ejs').on('change', browserSync.reload);
-    console.log('App running (browser sync) in container on port ' + config.port);
-    browserSync.init({
-        proxy: 'localhost:' + config.port,
-        files: [
-            'index.html', 
-            '../app/**/*.js',
-            './**/*.js'],
-        open: false,
-        reloadDelay: 2000
-    });
+    console.log('App running in container on port ' + config.port);
 }

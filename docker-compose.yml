@@ -6,15 +6,24 @@ services:
         build:
             context: .
             dockerfile: .docker/node.dockerfile
-        volumes:
-            - .:/home/app/
-            - /home/app/node_modules
+      #  volumes:
+         #   - .:/home/api/
+         #   - /home/api/node_modules
         ports:
             - "3000:3000"
-            - "3001:3001"
-            - "3002:3002"
         depends_on:
             - mongo
+            
+    angular: # name of the first service
+        build:
+            context: .
+            dockerfile: .docker/angular.dockerfile
+     #   volumes:
+         #   - .:/home/client/
+         #   - /home/client/node_modules
+         #   - /home/client/typings
+        ports: 
+            - '4200:4200' # specify port forwarding
     mongo:
         container_name: mongo-sandbox
         build:

@@ -15,6 +15,6 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.use(express.static('./'));
-app.use(express.static('./public'));
+app.use(express.static('./client'));
 
 module.exports = app;
