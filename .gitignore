@@ -7,6 +7,6 @@ data/db/
 *.log
 *~
 ._*
-app/*.js
-app/*.js.map
+client/app/*.js
+client/app/*.js.map
 typings/
