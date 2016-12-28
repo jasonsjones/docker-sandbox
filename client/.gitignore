@@ -1,0 +1,12 @@
+.config/
+.bash_history
+.npm/
+node_modules/
+data/db/
+.DS_Store*
+*.log
+*~
+._*
+app/*.js
+app/*.js.map
+typings/
