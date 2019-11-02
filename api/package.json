@@ -20,7 +20,7 @@
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.1.9",
-    "mongoose": "^4.6.0",
+    "mongoose": "^5.7.7",
     "morgan": "^1.7.0"
   },
   "devDependencies": {
